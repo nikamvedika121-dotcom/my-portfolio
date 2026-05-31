@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vedika Nikam | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
+}
+
+
+body{
+    background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c') no-repeat center center/cover;
+    position: relative;
+    color:#e2e8f0;
+}
+
+
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(10,15,30,0.75); /* PERFECT BALANCE */
+    z-index:-1;
+}
+
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 50px;
+    background:rgba(0,0,0,0.7);
+    backdrop-filter:blur(10px);
+    position:sticky;
+    top:0;
+    z-index: 1000;
+}
+
+nav h2{color:#38bdf8;}
+
+nav a{
+    margin-left:20px;
+    text-decoration:none;
+    color:#e2e8f0;
+    position:relative;
+}
+
+nav a::after{
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    background:#38bdf8;
+    left:0;
+    bottom:-5px;
+    transition:0.3s;
+}
+nav a:hover::after{width:100%;}
+
+
+.hero{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    height:90vh;
+    flex-wrap:wrap;
+    text-align:center;
+}
+
+.hero-text h1{font-size:50px;}
+.hero-text span{color:#38bdf8;}
+
+#typing{margin-top:10px; color:#cbd5f5; height: 25px;}
+
+
+.hero img{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    border:4px solid #38bdf8;
+    object-fit:cover;
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0);}
+}
+
+
+.btn{
+    margin-top:20px;
+    padding:10px 20px;
+    background:#38bdf8;
+    color:#0f172a;
+    border-radius:5px;
+    text-decoration:none;
+    display:inline-block;
+}
+.btn:hover{background:#0ea5e9; transform:scale(1.05);}
+
+
+.section{
+    padding:60px 50px;
+    margin:20px;
+    border-radius:12px;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(6px);
+    opacity:0;
+    transform:translateY(50px);
+    transition:0.6s;
+}
+.section.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+h2{color:#38bdf8; margin-bottom:20px;}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    padding:20px;
+    border-radius:10px;
+    margin:10px 0;
+    transition:0.3s;
+}
+.card:hover{
+    transform:translateY(-5px);
+    background:rgba(56,189,248,0.2);
+}
+
+
+.skills span{
+    display:inline-block;
+    background:#1e293b;
+    padding:10px 15px;
+    margin:5px;
+    border-radius:20px;
+}
+.skills span:hover{
+    background:#38bdf8;
+    color:#0f172a;
+}
+.project {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.project:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    color: #0f172a;
+}
+
+/* --- Added Certificate Specific Styling --- */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.cert-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.cert-card:hover {
+    transform: scale(1.03);
+    background: rgba(56, 189, 248, 0.1);
+    border-color: #38bdf8;
+}
+
+.cert-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.cert-card h4 {
+    font-size: 0.9rem;
+    color: #38bdf8;
+}
+
+/* Lightbox popup styling */
+#lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border: 2px solid #38bdf8;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px; right: 30px;
+    font-size: 40px; color: white;
+    cursor: pointer;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:rgba(0,0,0,0.8);
+}
+</style>
+</head>
+
+<body>
+
+
+<nav>
+    <h2>MyPortfolio</h2>
+    <div>
+        <a href="#about">About</a>
+        <a href="#Education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#Certificates">Certificates</a>
+        <a href="#Achievements">Achievements</a>
+        <a href="#Hobbies">Hobbies</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>Hi, I'm <span>VEDIKA NIKAM</span></h1>
+        <p id="typing"></p>
+        
+    </div>
+
+    
+    <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 232330.png" alt="profile">
+</section>
+
+
+<section class="section" id="about">
+<h2>About Me</h2>
+<div class="card">
+<p>
+I am a Computer Engineering student passionate about coding, web development,
+and solving real-world problems. I enjoy learning new technologies and building projects.
+I am committed to improving my skills and turning challenges into opportunities.
+</p>
+</div>
+</section>
+
+
+<section class="section Education" id="Education">
+    <h2>Education</h2>
+
+    <div class="edu-item">
+        <div class="edu-line">
+            <span>MIT Academy Of Engineering</span>
+            <span>2025 - Present</span>
+        </div>
+        <div class="edu-desc">Bachelor's Degree (First Year)</div>
+    </div>
+
+    <div class="edu-item">
+        <div class="edu-line">
+            <span>Bhagirathi Mahavidyala Vaijapur</span>
+            <span>2024 - 2025</span>
+        </div>
+        <div class="edu-desc">Higher Secondary Education (12th)</div>
+    </div>
+
+    <div class="edu-item">
+        <div class="edu-line">
+            <span>Modern International School</span>
+            <span>2022 - 2023</span>
+        </div>
+        <div class="edu-desc">Secondary Education (10th)</div>
+    </div>
+
+</section>
+
+<section class="section skills" id="skills">
+<h2>Skills</h2>
+<span>HTML</span>
+<span>CSS</span>
+<span>Python</span>
+<span>Basics of C programming</span>
+<span>Excel</span>
+<span>Data Visualization</span>
+<span>Basic Web Development</span>
+</section>
+
+
+<section class="section" id="projects">
+    <h2>Projects</h2>
+
+    <div class="project">
+        <h3>Data Visualization Project</h3>
+        <p>Project using Tableau and Orange: Created pie charts, bar graphs of a dataset in CSV file.</p>
+    </div>
+
+    <div class="project">
+        <h3>Student Grade Calculator</h3>
+        <p>Created a program that takes marks as input and calculates total, percentage, and grade of a student.</p>
+    </div>
+
+    <div class="project">
+        <h3>Currently Working on Project</h3>
+        <p>Student Expenses Tracker: Currently working on this project .A system designed to help students track and manage their daily expenses efficiently. It allows users to record spending, categorize expenses, and monitor their financial habits.</p>
+    </div>
+</section>
+
+<section class="section" id="Certificates">
+    <h2>Certificates</h2>
+    <div class="cert-grid">
+        <div class="cert-card" onclick="openCert('c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-04-14 221311 - Copy - Copy.png')">
+            <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-04-14 221311 - Copy - Copy.png" alt="Certificate">
+            <h4>NASSCOM - FutureSkills Gold</h4>
+        </div>
+        <div class="cert-card" onclick="openCert('c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 231522.png')">
+            <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 231522.png" alt="Certificate">
+            <h4>Python Essentials 2 - Cisco</h4>
+        </div>
+        <div class="cert-card" onclick="openCert('c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 231546 - Copy.png')">
+            <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 231546 - Copy.png" alt="Certificate">
+            <h4>Python Essentials 1 - Cisco</h4>
+        </div>
+        <div class="cert-card" onclick="openCert('c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 231613.png')">
+            <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 231613.png" alt="Certificate">
+            <h4>IBM Career Management</h4>
+        </div>
+        <div class="cert-card" onclick="openCert('c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 231634.png')">
+            <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 231634.png">
+            <h4>IYMC Math Challenge</h4>
+        </div>
+        <div class="cert-card" onclick="openCert('c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 232834.png')">
+            <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 232834.png">
+            <h4>Anthropic Claude 101</h4>
+        </div>
+        <div class="cert-card" onclick="openCert('c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 232927.png')">
+            <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 232927.png">
+            <h4>AI Fluency - Framework</h4>
+        </div>
+        <div class="cert-card" onclick="openCert('c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 233012.png')">
+            <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 233012.png">
+            <h4>AI Fluency - Students</h4>
+        </div>
+        <div class="cert-card" onclick="openCert('c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 233044.png')">
+            <img src="c:\Users\Vedika\OneDrive\Desktop\PORTFOLIO AND CERTIFICATES\Screenshot 2026-05-15 233044.png">
+            <h4>AI Fluency - Nonprofits</h4>
+        </div>
+    </div>
+</section>
+
+<div id="lightbox" onclick="this.style.display='none'">
+    <span class="close-btn">&times;</span>
+    <img id="fullCert" src="" alt="Full Certificate">
+</div>
+
+
+<section class="section" id="Achievements">
+<h2>Achievements</h2>
+<div class="card">Participated in inter-college technical events</div>
+<div class="card">Completed multiple programming exercises using C language  and python.</div>
+<div class="card">Teamwork & presentation skills</div>
+</section>
+
+
+<section class="section" id="Hobbies">
+<h2>Hobbies</h2>
+<div class="card">Exploring new technologies</div>
+<div class="card"> Participating College events</div>
+<div class="card"> Lisening to Music & singing</div>
+<div class="card">Creative designing &  Participating hackathons</div>
+</section>
+
+<section class="section contact" id="contact">
+    <h2>Contact</h2>
+    <p>Email:  <a href="nikamvedika121@gmail.com" target="_blank">nikamvedika121@gmail.com</a></p>
+    <p>Phone: 8446591417</p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/vedika-nikam-893a9738b" target="_blank">linkedin.com/in/vedika-nikam</a></p>
+    <p>GitHub: <a href="https://github.com/" target="_blank">github.com/vedika27</a></p>
+</section>
+
+
+<footer>
+<p>© 2026 Vedika Nikam | Portfolio</p>
+</footer>
+
+<script>
+
+const text="Computer Engineering Student | Web Developer";
+let i=0;
+function typing(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,50);
+}}
+typing();
+
+
+const sections=document.querySelectorAll(".section");
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+const top=sec.getBoundingClientRect().top;
+if(top<window.innerHeight-100){
+sec.classList.add("show");
+}
+});
+});
+
+// Added function for opening certificates
+function openCert(src) {
+    document.getElementById("fullCert").src = src;
+    document.getElementById("lightbox").style.display = "flex";
+}
+</script>
+
+</body>
+</html>
